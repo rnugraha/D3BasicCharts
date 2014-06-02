@@ -1,0 +1,51 @@
+/**
+ * Created with IntelliJ IDEA.
+ * User: rnugraha
+ * Date: 31/05/14
+ * Time: 00:58
+ * To change this template use File | Settings | File Templates.
+ */
+
+body {
+    font-family: Arial;
+    font-size: 12px;
+}
+
+.axis text {
+    font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.chart {
+    border: solid 1px grey;
+}
+
+.chart rect {
+    fill: lightseagreen;
+}
+
+.chart text {
+    fill: black;
+    font: 10px sans-serif;
+    text-anchor: end;
+}
+
+div.tooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 12px;
+    font: 12px sans-serif;
+    background: bisque;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    font-size: .95em;
+}
