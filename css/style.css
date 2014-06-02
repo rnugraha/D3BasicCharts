@@ -29,6 +29,9 @@ body {
 .chart rect {
     fill: lightseagreen;
 }
+.chart rect:hover {
+    fill: orange;
+}
 
 .chart text {
     fill: black;
@@ -41,11 +44,11 @@ div.tooltip {
     text-align: center;
     width: auto;
     height: auto;
-    padding: 12px;
+    padding: 5px;
     font: 12px sans-serif;
-    background: bisque;
-    border: 0px;
-    border-radius: 8px;
+    background: white;
+    border: 1px grey solid;
+    border-radius: 3px;
     pointer-events: none;
     font-size: .95em;
 }
