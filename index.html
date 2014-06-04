@@ -5,10 +5,28 @@
     <title>D3 Test</title>
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="js/d3.js"></script>
+    <script type="text/javascript" src="js/D3Charts.js"></script>
 
 </head>
 <body>
-    <svg class="chart" id="barChart"></svg>
-    <script type="text/javascript" src="js/main.js"></script>
+
+    <!--Horizontal Bar Chart Sample-->
+    <h1>Horizontal Bar Chart</h1>
+    <div id="barChart"></div>
+
+    <script type="text/javascript">
+
+        // horizontal bar chart initiation
+        var JSONData = [
+            {node: "Biomarker Data", total: 225},
+            {node: "Lab Results", total: 534},
+            {node: "Metatasis", total: 3205},
+            {node: "Primary Tumor", total: 8525},
+            {node: "Subjects", total: 4195}
+        ];
+
+        var barChart = new HorizontalBarChart(JSONData, "#barChart");
+
+    </script>
 </body>
 </html> 

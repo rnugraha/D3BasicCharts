@@ -9,36 +9,31 @@
 body {
     font-family: Arial;
     font-size: 12px;
+    text-align: center;
 }
-
 .axis text {
     font: 10px sans-serif;
 }
-
 .axis path,
 .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
-
-.chart {
+.horizontalBarchart {
     border: solid 1px grey;
 }
-
-.chart rect {
+.horizontalBarchart rect {
     fill: lightseagreen;
 }
-.chart rect:hover {
+.horizontalBarchart rect:hover {
     fill: orange;
 }
-
-.chart text {
+.horizontalBarchart text {
     fill: black;
-    font: 10px sans-serif;
+    font: 11px sans-serif;
     text-anchor: end;
 }
-
 div.tooltip {
     position: absolute;
     text-align: center;

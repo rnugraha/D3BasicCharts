@@ -1,6 +1,3 @@
-/**
- * Created by rnugraha on 31/05/14.
- */
 
 /**
  *
@@ -9,7 +6,7 @@
  * @param title chart title
  * @constructor
  */
-var BarChart = function (data, elId, title) {
+var HorizontalBarChart = function (data, elId, title) {
 
     // dimensions
     var margin = {top: 20, right: 40, bottom: 40, left: 100},
@@ -17,7 +14,7 @@ var BarChart = function (data, elId, title) {
         width = 540 - margin.left - margin.right,
         height = (barHeight * data.length) + margin.top + margin.bottom;
 
-    // hover div
+    // init tooltip box
     var div = d3.select("body").append("div")
         .style("opacity", 0);
 
@@ -35,6 +32,8 @@ var BarChart = function (data, elId, title) {
 
     // init chart
     var chart = d3.select(elId)
+        .append("svg")
+        .attr("class", "horizontalBarchart")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height);
 
@@ -101,17 +100,3 @@ var BarChart = function (data, elId, title) {
             return d.total;
         });
 };
-
-var JSONData = [
-    {node: "Biomarker Data", total: 225},
-    {node: "Lab Results", total: 534},
-    {node: "Metatasis", total: 3205},
-    {node: "Primary Tumor", total: 8525},
-    {node: "Subjects", total: 4195}
-];
-
-var barChart = new BarChart(JSONData, "#barChart");
-
-
-
-
