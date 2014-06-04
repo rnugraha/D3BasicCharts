@@ -10,30 +10,47 @@ body {
     font-family: Arial;
     font-size: 12px;
     text-align: center;
+    background: ghostwhite;
 }
+
+h1 {
+    margin-top: 2em;
+}
+
 .axis text {
     font: 10px sans-serif;
 }
+
 .axis path,
 .axis line {
     fill: none;
     stroke: #000;
     shape-rendering: crispEdges;
 }
-.horizontalBarchart {
+
+.horizontalBarChart {
     border: solid 1px grey;
+    background: white;
 }
-.horizontalBarchart rect {
+
+.horizontalBarChart rect {
     fill: lightseagreen;
 }
-.horizontalBarchart rect:hover {
+
+.horizontalBarChart rect:hover {
     fill: orange;
 }
-.horizontalBarchart text {
+
+.horizontalBarChart text {
     fill: black;
     font: 11px sans-serif;
     text-anchor: end;
 }
+
+.arc path {
+    stroke: #fff;
+}
+
 div.tooltip {
     position: absolute;
     text-align: center;

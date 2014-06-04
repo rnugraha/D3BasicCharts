@@ -14,6 +14,10 @@
     <h1>Horizontal Bar Chart</h1>
     <div id="barChart"></div>
 
+    <!--Pie Chart Sample-->
+    <h1>Pie Chart</h1>
+    <div id="pieChart"></div>
+
     <script type="text/javascript">
 
         // horizontal bar chart initiation
@@ -26,6 +30,14 @@
         ];
 
         var barChart = new HorizontalBarChart(JSONData, "#barChart");
+
+        // pie chart initiation
+        var pieData = [
+            {gender: "Male", total:5343},
+            {gender: "Female", total:8525}
+        ];
+
+        var pieChart = new PieChart(pieData, "#pieChart");
 
     </script>
 </body>

@@ -33,7 +33,7 @@ var HorizontalBarChart = function (data, elId, title) {
     // init chart
     var chart = d3.select(elId)
         .append("svg")
-        .attr("class", "horizontalBarchart")
+        .attr("class", "horizontalBarChart")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height);
 
@@ -100,3 +100,60 @@ var HorizontalBarChart = function (data, elId, title) {
             return d.total;
         });
 };
+
+/**
+ * Pie Chart
+ * @param data
+ * @param elId
+ * @param title
+ * @constructor
+ */
+var PieChart = function (data, elId, title) {
+
+    // dimensions
+    var width = 500,
+        height = 300,
+        radius = Math.min(width, height) / 2;
+
+    // to have color as ordinal scale
+    var color = d3.scale.ordinal()
+        .range(["#4577b7", "#b74c45"]);
+
+    var arc = d3.svg.arc()
+        .outerRadius(radius - 10)
+        .innerRadius(0);
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function(d) { return d.total; });
+
+    var svg = d3.select(elId).append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("style", "")
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+
+    var g = svg.selectAll(".arc")
+        .data(pie(data))
+        .enter().append("g")
+        .attr("class", "arc");
+
+    g.append("path")
+        .attr("d", arc)
+        .style("fill", function (d) {
+            return color(d.data.gender);
+        });
+
+    g.append("text")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .style("text-anchor", "middle")
+        .style("text-color", "white")
+        .text(function(d) { return d.data.gender });
+};
+
+
+
+
