@@ -155,5 +155,116 @@ var PieChart = function (data, elId, title) {
 };
 
 
+var TwoSubsetHistrogram = function (subset1, subset2, elId, title) {
+
+// Total subset
+    var totalset = subset1.concat(subset2);
+
+// A formatter for counts.
+    var formatCount = d3.format(",.0f");
+
+// General attributes of the
+    var margin = {top: 10, right: 30, bottom: 30, left: 70},
+        width = 500 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+// Define scales for both x and y
+    var x = d3.scale.linear()
+        .domain([0, d3.max(totalset)])
+        .range([0, width]);
+
+// Generate a histogram using twenty uniformly-spaced bins.
+    var data = d3.layout.histogram()
+        .bins(x.ticks(20))
+        (subset1);
+
+    var data2 = d3.layout.histogram()
+        .bins(x.ticks(20))
+        (subset2);
+
+    var y = d3.scale.linear()
+        .domain([0, d3.max(data, function(d) { return d.y; })])
+        .range([height, 0]);
+
+// Define axis based on related scale
+    var xAxis = d3.svg.axis()
+        .scale(x)
+        .orient("bottom");
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .orient("left");
+
+// Generate the svg chart
+    var svg = d3.select(elId).append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+// Generate graph from first subset
+    var bar = svg.selectAll(".bar")
+        .data(data)
+        .enter().append("g")
+        .attr("class", "bar")
+        .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+    var div = d3.select("body").append("div")
+        .style("opacity", 0);
+
+    bar.append("rect")
+        .attr("x", 1)
+        .attr("width", x(data[0].dx) - 1)
+        .attr("height", function(d) { return height - y(d.y); })
+        .on("mouseover", function(d) {
+            div.transition()
+                .duration(200)
+                .style("opacity", .9);
+            div .html(d.y + " patients died at age " + d.x)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .attr("class", "tooltip");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .duration(500)
+                .style("opacity", 0);
+        });;
+
+// Generate graph from second subset
+    var bar2 = svg.selectAll(".bar2")
+        .data(data2)
+        .enter().append("g")
+        .attr("class", "bar2")
+        .attr("transform", function(d) { return "translate(" + x(d.x) + "," + y(d.y) + ")"; });
+
+    bar2.append("rect")
+        .attr("x", 1)
+        .attr("stroke-opacity", 0.2)
+        .attr("width", x(data2[0].dx) - 1)
+        .attr("height", function(d) { return height - y(d.y); });
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+
+
+// axis text on y-axis
+    svg.append("text")
+        .attr("class", "y label")
+        .attr("text-anchor", "end")
+        .attr("x", 0)
+        .attr("y", -50)
+        .attr("dy", ".75em")
+        .attr("transform", "rotate(-90)")
+        .text("number of patients");
+};
+
+
 
 

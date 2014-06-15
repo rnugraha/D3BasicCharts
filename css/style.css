@@ -64,3 +64,23 @@ div.tooltip {
     pointer-events: none;
     font-size: .95em;
 }
+
+.bar rect {
+    fill: steelblue;
+    shape-rendering: crispEdges;
+    stroke-opacity:0.9;
+}
+
+.bar2 rect {
+    fill: red;
+    shape-rendering: crispEdges;
+    fill-opacity: 0.4;
+}
+
+.axis path, .axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+
