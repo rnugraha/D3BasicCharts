@@ -115,9 +115,15 @@ var PieChart = function (data, elId, title) {
         height = 300,
         radius = Math.min(width, height) / 2;
 
+    var sumAll = d3.sum(data, function (d) {return d.total});
+
     // to have color as ordinal scale
     var color = d3.scale.ordinal()
         .range(["#4577b7", "#b74c45"]);
+
+    // init tooltip box
+    var div = d3.select("body").append("div")
+        .style("opacity", 0);
 
     var arc = d3.svg.arc()
         .outerRadius(radius - 10)
@@ -144,13 +150,25 @@ var PieChart = function (data, elId, title) {
         .attr("d", arc)
         .style("fill", function (d) {
             return color(d.data.gender);
+        })
+        .on("mousemove", function(d) {
+            div.transition()
+                .style("opacity", 1);
+            div .html(d.data.gender + " is " + d3.round(100 * d.data.total/sumAll) + "% (" + d.data.total + " samples)" )
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 28) + "px")
+                .attr("class", "tooltip");
+        })
+        .on("mouseout", function(d) {
+            div.transition()
+                .style("opacity", 0);
         });
 
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
         .attr("dy", ".35em")
         .style("text-anchor", "middle")
-        .style("text-color", "white")
+        .style("fill", "white")
         .text(function(d) { return d.data.gender });
 };
 
