@@ -63,11 +63,11 @@ var HorizontalBarChart = function (data, elId, title) {
 
     bar.append("rect")
         .attr("width", 0)
-        //.transition().ease("bounce").duration(1500)
+        .transition().delay(function (d,i){ return i * 500;}).duration(500) // appear one-by-one
         .attr("width", function (d) {
             return xScale(d.total);
         })
-        .attr("height", barHeight - 1)
+        .attr("height", barHeight - 1);
 
     // add x axis
     chart.append("g")
@@ -90,6 +90,7 @@ var HorizontalBarChart = function (data, elId, title) {
     // bar values
     bar.append("text")
         .attr("x", 0)
+        .transition().delay(function (d,i){ return i * 500;}).duration(500) // appear one-by-one
         .attr("x", function (d) {
             return xScale(d.total) + 5 ;
         })
@@ -119,7 +120,7 @@ var PieChart = function (data, elId, title) {
 
     // to have color as ordinal scale
     var color = d3.scale.ordinal()
-        .range(["#4577b7", "#b74c45"]);
+        .range(["#4577b7", "#b74c45", "darkorange", "salmon"]);
 
     // init tooltip box
     var div = d3.select("body").append("div")
@@ -146,7 +147,7 @@ var PieChart = function (data, elId, title) {
         .enter().append("g")
         .attr("class", "arc");
 
-    g.append("path")
+    var path = g.append("path")
         .attr("d", arc)
         .style("fill", function (d) {
             return color(d.data.gender);
@@ -163,6 +164,15 @@ var PieChart = function (data, elId, title) {
             div.transition()
                 .style("opacity", 0);
         });
+
+    // attrTween
+    path.transition().delay(500).duration(2000).attrTween("d", function(d) {
+        var interpolate = d3.interpolate(0, d.endAngle);
+        return function(t) {
+            d.endAngle = interpolate(t);
+            return arc(d);
+        }
+    })
 
     g.append("text")
         .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
