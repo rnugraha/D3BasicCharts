@@ -34,11 +34,11 @@ h1 {
 }
 
 .horizontalBarChart rect {
-    fill: lightseagreen;
+    fill: #4577b7;
 }
 
 .horizontalBarChart rect:hover {
-    fill: orange;
+    fill: #b74c45;
 }
 
 .horizontalBarChart text {
@@ -49,6 +49,7 @@ h1 {
 
 .arc path {
     stroke: #fff;
+    stroke-width: 1
 }
 
 div.tooltip {
@@ -66,13 +67,13 @@ div.tooltip {
 }
 
 .bar rect {
-    fill: steelblue;
+    fill: #4577b7;
     shape-rendering: crispEdges;
     stroke-opacity:0.9;
 }
 
 .bar2 rect {
-    fill: red;
+    fill: #b74c45;
     shape-rendering: crispEdges;
     fill-opacity: 0.4;
 }
